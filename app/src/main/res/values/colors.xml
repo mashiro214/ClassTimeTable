@@ -8,5 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#888</color>
-    <color name="blue">#0000FF</color>
+    <color name="blue">#0088FF</color>
+
+    <color name="colorPrimary">#efeeee</color>
+    <color name="colorPrimaryDart">#efeeee</color>
+    <color name="colorAccent">#efeeee</color>
+
 </resources>
