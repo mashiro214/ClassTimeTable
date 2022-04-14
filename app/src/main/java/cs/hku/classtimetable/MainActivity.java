@@ -1,7 +1,5 @@
 package cs.hku.classtimetable;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,16 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.CookieHandler;
@@ -37,8 +35,15 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import soup.neumorphism.NeumorphButton;
+
 public class MainActivity extends Activity implements View.OnClickListener  {
 
+    private LinearLayout layout_main;
+    private Animation animation_fadein;
+
+    EditText txt_UserName, txt_UserPW;
+    NeumorphButton btn_Login;
     public static DBHelper DB;
 
     @Override
@@ -46,7 +51,20 @@ public class MainActivity extends Activity implements View.OnClickListener  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_Login = (Button)findViewById(R.id.btn_Login);
+        Utils.blackIconStatusBar(MainActivity.this, R.color.light_background);
+
+        layout_main = findViewById(R.id.layout_main);
+        animation_fadein = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout_main.setVisibility(View.VISIBLE);
+                layout_main.setAnimation(animation_fadein);
+            }
+        }, 500);
+
+
+        btn_Login = findViewById(R.id.btn_Login);
         txt_UserName = (EditText)findViewById(R.id.txt_UserName);
         txt_UserPW = (EditText)findViewById(R.id.txt_UserPW);
 
@@ -68,8 +86,7 @@ public class MainActivity extends Activity implements View.OnClickListener  {
             connect( uname, upassword );
         }
     }
-    EditText txt_UserName, txt_UserPW;
-    Button btn_Login;
+
 
     public String keyid() {
         Calendar c1 = Calendar.getInstance();
@@ -381,7 +398,7 @@ public class MainActivity extends Activity implements View.OnClickListener  {
                     // 解析html页面，获取Event-Date，将 Event-Date 存入 EventDate 数据表
                     parse_HTML_Source_to_Event( moodlePageContent );
                     // 登录成功进入菜单页
-                    startActivity(new Intent(getBaseContext(), MenuActivity.class));
+                    startActivity(new Intent(getBaseContext(), EventActivity.class));
                 } else {
                     alert( "Error", "Fail to login" );
                 }

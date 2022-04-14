@@ -20,10 +20,12 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable/no_background.xml" value="0.1535" />
         <entry key="app/src/main/res/layout/activity_course.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/activity_event.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/activity_event_edit.xml" value="0.288458251953125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20516304347826086" />
+        <entry key="app/src/main/res/layout/activity_main1.xml" value="0.29010416666666666" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.20516304347826086" />
         <entry key="app/src/main/res/layout/activity_neu.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_week_view.xml" value="0.28058624267578125" />
