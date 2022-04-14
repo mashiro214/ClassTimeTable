@@ -51,6 +51,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             // highlight selected date, 30% transparency
             if (date.equals(CalendarUtils.selectedDate))
                 holder.parentView.setBackgroundColor(Color.parseColor("#3036A0FF"));
+            if (Event.datesWithDDL.contains(date))
+                holder.dayOfMonth.setTextColor(Color.parseColor("#FF6269"));
         }
 
 

@@ -1,15 +1,26 @@
 package cs.hku.classtimetable;
 
 import android.database.Cursor;
+import android.os.Build;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Event {
     // store all events
     public static ArrayList<Event> eventsList = new ArrayList<>();
+
+    // whether retrieved from DB before
+    private static boolean flag = false;
+
+    public static Set<LocalDate> datesWithDDL = new HashSet<>();
 
     // return all events for a day
     public static ArrayList<Event> eventsForDate(LocalDate date) {
@@ -23,7 +34,27 @@ public class Event {
         return events;
     }
 
-
+    // get events from DB
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void retrieveEvents() {
+        Cursor res = MainActivity.DB.getEventData();
+        if(res.getCount()==0 || flag){
+            return;
+        }
+        while(res.moveToNext()){
+            String title = res.getString(0);
+            // string to LocalDate
+            String[] dateArray = res.getString(1).split(":");
+            int daysOfYear = Integer.parseInt(dateArray[1]);
+            Year y = Year.of(Integer.parseInt(dateArray[0]));
+            LocalDate date = y.atDay(daysOfYear + 1);
+            datesWithDDL.add(date);
+            LocalTime time = LocalTime.now();
+            eventsList.add(new Event(title, date));
+        }
+        // only run once
+        flag = true;
+    }
 
     private String name;
     private LocalDate date;
@@ -33,6 +64,12 @@ public class Event {
         this.name = name;
         this.date = date;
         this.time = time;
+    }
+
+    public Event(String name, LocalDate date) {
+        this.name = name;
+        this.date = date;
+        this.time = null;
     }
 
     public String getName() {

@@ -33,6 +33,7 @@ public class EventActivity extends AppCompatActivity implements CalendarAdapter.
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now();
         CalendarUtils.currentDate = LocalDate.now();
+        Event.retrieveEvents();
         setMonthView();
     }
 

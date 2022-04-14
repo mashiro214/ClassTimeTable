@@ -35,6 +35,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setContentView(R.layout.activity_week_view);
         initWidgets();
         setWeekView();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -79,13 +80,16 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setWeekView();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onResume() {
         super.onResume();
         setEventAdapter();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setEventAdapter() {
+
         // get events list for selected date
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
         // auto hide "empty" textview
