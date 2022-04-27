@@ -113,4 +113,15 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDatabase.rawQuery("Select * from EventDate", null);
         return cursor;
     }
+
+    public Boolean deleteEvent (String event) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("Select * from EventDate where event = ?", new String[]{event});
+        if (cursor.getCount() > 0) {
+            long result = sqLiteDatabase.delete("EventDate", "event=?", new String[]{event});
+            return result != -1;
+        } else {
+            return false;
+        }
+    }
 }

@@ -38,7 +38,9 @@ public class Event {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void retrieveEvents() {
         Cursor res = MainActivity.DB.getEventData();
-        if(res.getCount()==0 || flag){
+        eventsList.clear();
+        datesWithDDL.clear();
+        if(res.getCount()==0){
             return;
         }
         while(res.moveToNext()){
@@ -52,8 +54,7 @@ public class Event {
             LocalTime time = LocalTime.now();
             eventsList.add(new Event(title, date));
         }
-        // only run once
-        flag = true;
+
     }
 
     private String name;

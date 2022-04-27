@@ -9,10 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,14 +32,41 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private NeumorphTextView emptyTV;
     private ListView eventListView;
 
+    private  AlertDialog alert = null;
+    private  AlertDialog.Builder builder = null;
+
+    public void deleteEvent(String event) {
+        alert = null;
+        builder = new AlertDialog.Builder(WeekViewActivity.this);
+        alert = builder.setTitle("Delete Event")
+                .setMessage("Are you sure to delete this event?")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(WeekViewActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity.DB.deleteEvent(event);
+                        finish();
+                        startActivity(getIntent());
+                    }
+                }).create();
+        alert.show();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_view);
-        initWidgets();
-        setWeekView();
 
+        initWidgets();
+        // Event.retrieveEvents();
+        setWeekView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -84,6 +115,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     @Override
     protected void onResume() {
         super.onResume();
+        Event.retrieveEvents();
         setEventAdapter();
     }
 
@@ -99,6 +131,20 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
             emptyTV.setVisibility(View.VISIBLE);
         EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
         eventListView.setAdapter(eventAdapter);
+        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final TextView event = view.findViewById(R.id.eventCellTV);
+                String eventName = (String)event.getText();
+                event.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        System.out.println(eventName);
+                        deleteEvent(eventName);
+                    }
+                });
+            }
+        });
     }
 
     public void newEventAction(View view) {

@@ -11,9 +11,9 @@
     <color name="light_blue">#0088FF</color>
     <color name="blue">#193566</color>
 
-    <color name="colorPrimary">#efeeee</color>
-    <color name="colorPrimaryDart">#efeeee</color>
-    <color name="colorAccent">#efeeee</color>
+    <color name="colorPrimary">#ecf0f3</color>
+    <color name="colorPrimaryDart">#ecf0f3</color>
+    <color name="colorAccent">#ecf0f3</color>
 
     <color name="light_background">#ecf0f3</color>
     <color name="textColor">#193566</color>

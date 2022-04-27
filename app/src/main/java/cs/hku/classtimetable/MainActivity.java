@@ -399,6 +399,7 @@ public class MainActivity extends Activity implements View.OnClickListener  {
                     parse_HTML_Source_to_Event( moodlePageContent );
                     // 登录成功进入菜单页
                     startActivity(new Intent(getBaseContext(), EventActivity.class));
+                    // startActivity(new Intent(getBaseContext(), MenuActivity.class));
                 } else {
                     alert( "Error", "Fail to login" );
                 }

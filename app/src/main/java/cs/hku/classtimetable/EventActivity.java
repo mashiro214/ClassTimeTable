@@ -38,6 +38,14 @@ public class EventActivity extends AppCompatActivity implements CalendarAdapter.
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Event.retrieveEvents();
+        setMonthView();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
