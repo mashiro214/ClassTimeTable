@@ -85,16 +85,19 @@ public class EventActivity extends AppCompatActivity implements CalendarAdapter.
         }
     }
 
-    public void weeklyAction(View view) {
-        startActivity(new Intent(this, WeekViewActivity.class));
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void currentAction(View view) {
+            if (CalendarUtils.selectedDate.equals(LocalDate.now()) )
+                Toast.makeText(EventActivity.this, "Selected", Toast.LENGTH_SHORT).show();
+            else
+            {
+                CalendarUtils.selectedDate = LocalDate.now();
+                setMonthView();
+            }
 
-            CalendarUtils.selectedDate = LocalDate.now();
-            setMonthView();
+    }
 
-
+    public void newEventAction(View view) {
+        startActivity(new Intent(this, EventEditActivity.class));
     }
 }

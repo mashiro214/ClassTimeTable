@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:textColor="@color/textColor"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="Name:"
         android:textSize="20sp" />
 
@@ -72,40 +72,22 @@
         app:neumorph_shapeAppearance="@style/ShapeAppearance"
         android:layout_gravity="center"
         app:neumorph_shapeType="flat"
-        android:text="JAN 01 2020">
+        android:text="JAN 01 2020"
+        android:textColor="@color/blue">
 
     </soup.neumorphism.NeumorphButton>
 
-    <TextView
-        android:id="@+id/eventDateTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity = "center"
-        android:layout_marginTop="20dp"
-        android:text="Date:"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/eventTimeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity = "center"
-        android:layout_marginTop="20dp"
-        android:text="Time:"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"/>
 
     <soup.neumorphism.NeumorphButton
         style="@style/Widget.Neumorph.Button"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:onClick="saveEventAction"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:neumorph_shapeType="flat"
-        android:text="Add"/>
+        android:text="Add"
+        android:textColor="@color/blue"/>
 
 </LinearLayout>

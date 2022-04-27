@@ -24,9 +24,8 @@ import soup.neumorphism.NeumorphButton;
 
 public class EventEditActivity extends AppCompatActivity {
     private EditText eventNameET;
-    private TextView eventDateTV, eventTimeTV;
 
-    private LocalTime time;
+
 
     private DatePickerDialog datePickerDialog;
     private NeumorphButton dateButton;
@@ -38,9 +37,7 @@ public class EventEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
         initWidgets();
-        time = LocalTime.now();
-        eventDateTV.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        eventTimeTV.setText("Time: " + CalendarUtils.formattedTime(time));
+
         initDatePicker();
     }
 
@@ -50,8 +47,6 @@ public class EventEditActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
-
-
                 dateButton.setText(date);
             }
         };
@@ -97,22 +92,20 @@ public class EventEditActivity extends AppCompatActivity {
         return "Jan";
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void initWidgets() {
         eventNameET = findViewById(R.id.eventNameET);
-        eventDateTV = findViewById(R.id.eventDateTV);
-        eventTimeTV = findViewById(R.id.eventTimeTV);
-
         dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());
+        dateButton.setText(getDate());
     }
 
-    private String getTodaysDate() {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String getDate() {
+        LocalDate date = CalendarUtils.selectedDate;
+        int y = date.getYear();
+        int m = date.getMonthValue();
+        int d = date.getDayOfMonth();
+        return makeDateString(d, m, y);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

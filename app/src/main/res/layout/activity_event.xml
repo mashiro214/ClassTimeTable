@@ -182,16 +182,13 @@
         android:textColor="@color/blue"/>
     <soup.neumorphism.NeumorphFloatingActionButton
         style="@style/Widget.Neumorph.FloatingActionButton"
-
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="center"
-
-
+        android:onClick="newEventAction"
         android:layout_gravity="bottom|end"
         app:neumorph_shapeType="flat"
         android:src="@drawable/ic_baseline_add_24"
-
         android:layout_marginBottom="20dp"
         android:layout_marginRight="10dp"/>
 </FrameLayout>
